@@ -98,7 +98,7 @@ def draw_bg():
 
 
 # Define the Soldier class
-class Soldier():
+class Soldier(pygame.sprite.Sprite):
     def __init__(self,char_type, x, y, scale, speed , ammo , grenades):
         pygame.sprite.Sprite.__init__(self)
         #playing some action only when the player is alive
@@ -168,6 +168,9 @@ class Soldier():
 
     
     def move(self ,moving_left ,moving_right):
+        screen_scroll = 0
+        dx = 0
+        dy = 0
         #to move the player moving the rectangle position with speed var
         #reset mouvement variabl
         self.direction = -1
@@ -483,7 +486,7 @@ class Bullet (pygame.sprite.Sprite):
         if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
             self.kill()
     # check for collision with level
-        for tile in World.obstacle_list:
+        for tile in world.obstacle_list:
             if tile[1].colliderect(self.rect):
                 self.kill()
         #check collision with characters 
